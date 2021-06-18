@@ -1,6 +1,7 @@
 let canvas = document.getElementById("snake");
 let context = canvas.getContext("2d");
 let box = 32;
+let score = 0;
 let snake = [];
 snake[0] = {
     x: 8*box,
@@ -12,20 +13,26 @@ let comida = {
     y: Math.floor(Math.random()*15 + 1)*box
 }
 
+function criarScore () {
+    context.fillStyle = "#2B4162";
+    context.font = "15px 'Press Start 2P' ";
+    context.fillText("Score: " + score, canvas.width-140, 20); 
+   }
+
 function criarBG(){
-    context.fillStyle = "lightgreen";
+    context.fillStyle = "#D0CEBA";
     context.fillRect(0,0,16*box,16*box);
 }
 
 function criarCobrinha(){
     for(i=0; i<snake.length; i++){
-        context.fillStyle = "green";
+        context.fillStyle = "#417B5A";
         context.fillRect(snake[i].x, snake[i].y, box, box);
     }
 }
 
 function criarComida() {
-    context.fillStyle = "red";
+    context.fillStyle = "#880D1E";
     context.fillRect(comida.x, comida.y, box, box);
 }
 
@@ -55,6 +62,7 @@ function iniciarJogo(){
     criarBG();
     criarCobrinha();
     criarComida();
+    criarScore();
 
     let snakeX = snake[0].x;
     let snakeY = snake[0].y;
@@ -69,6 +77,7 @@ function iniciarJogo(){
     }else{
         comida.x = Math.floor(Math.random()*15 + 1)*box;
         comida.y = Math.floor(Math.random()*15 + 1)*box;
+        score++;
     }
 
     let newHead = {
