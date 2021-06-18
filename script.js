@@ -21,8 +21,8 @@ let comida = {
 
 function criarScore () {
     context.fillStyle = "#2B4162";
-    context.font = "15px 'Press Start 2P' ";
-    context.fillText("Score: " + score, canvas.width-140, 20); 
+    context.font = "18px 'Press Start 2P' ";
+    context.fillText("Score: " + score, canvas.width-180, 20); 
    }
 
 function criarBG(){
@@ -33,13 +33,13 @@ function criarBG(){
 function criarCobrinha(){
     for(i=0; i<snake.length; i++){
         context.fillStyle = "#417B5A";
-        context.fillRect(snake[i].x, snake[i].y, box, box);
+        context.fillRect(snake[i].x, snake[i].y, box-2, box-2);
     }
 }
 
 function criarComida() {
     context.fillStyle = "#880D1E";
-    context.fillRect(comida.x, comida.y, box, box);
+    context.fillRect(comida.x, comida.y, box-2, box-2);
 }
 
 document.addEventListener("keydown", update);
@@ -53,21 +53,15 @@ function update(event){
 
 function iniciarJogo(){
 
-    // if(snake[0].x > 15*box && direction == "right") snake[0].x = 0;
-    // if(snake[0].x < 0 && direction == "left") snake[0].x = 16*box;
-    // if(snake[0].y > 15*box && direction == "down") snake[0].y = 0;
-    // if(snake[0].y < 0 && direction == "up") snake[0].y = 16*box;
-
-    if(snake[0].x > 15*box && direction == "right" || snake[0].x < 0 && direction == "left" || snake[0].y > 15*box && direction == "down" || snake[0].y < 0 && direction == "up") {
-        clearInterval(jogo);
-        alert('Fim de jogo! \n Tente outra vez.');
-        location.reload();
-    } 
+    if(snake[0].x > 15*box && direction == "right") snake[0].x = 0;
+    if(snake[0].x < 0 && direction == "left") snake[0].x = 16*box;
+    if(snake[0].y > 15*box && direction == "down") snake[0].y = 0;
+    if(snake[0].y < 0 && direction == "up") snake[0].y = 16*box;
 
     for(i =1; i <snake.length; i++){
         if(snake[0].x == snake[i].x && snake[0].y == snake[i].y){
             clearInterval(jogo);
-            alert('Fim de jogo! \n Tente outra vez.');
+            alert('Game over! \n Try again.');
             location.reload();
         } 
     }
@@ -101,4 +95,4 @@ function iniciarJogo(){
     snake.unshift(newHead);
 }
 
-let jogo = setInterval(iniciarJogo, 100);
+let jogo = setInterval(iniciarJogo, 120);
